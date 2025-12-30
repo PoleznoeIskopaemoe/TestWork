@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +31,9 @@ public class ClientService {
 
     @Transactional
     public ClientDTO addClient(ClientDTO clientDTO) {
+        if (clientRepository.existsByPhone(clientDTO.getPhone())) {
+            throw new IllegalArgumentException("Клиент с таким телефоном уже существует");
+        }
         Client client = Client.builder()
                 .name(clientDTO.getName())
                 .phone(clientDTO.getPhone())
@@ -47,7 +49,6 @@ public class ClientService {
         Client client = clientRepository.findById(clientDTO.getId())
                 .orElseThrow(() -> new EntityNotFoundException("Клиент не найден"));
 
-        // Проверяем уникальность телефона, если он изменился
         if (!client.getPhone().equals(clientDTO.getPhone())) {
             if (clientRepository.existsByPhone(clientDTO.getPhone())) {
                 throw new IllegalArgumentException("Телефон уже используется другим клиентом");

@@ -1,10 +1,10 @@
 package com.example.testwork.entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-// Класс для составного ключа
-public class TimeSlotId implements java.io.Serializable {
+public class TimeSlotId implements Serializable {
     private LocalDate scheduleDate;
     private LocalTime hour;
 
