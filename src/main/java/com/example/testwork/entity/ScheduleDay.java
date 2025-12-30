@@ -15,7 +15,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class WorkingHours {
+public class ScheduleDay {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +34,7 @@ public class WorkingHours {
 
     @Column(name = "closing_time", nullable = false)
     @Builder.Default
-    private LocalTime closingTime = LocalTime.of(22, 0);
+    private LocalTime closingTime = LocalTime.of(19, 0);
 
     @Column(name = "max_capacity")
     @Builder.Default
